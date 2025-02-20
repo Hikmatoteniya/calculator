@@ -3,70 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="calculator.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            background: #e3f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calculator{
+            background: #3a4452;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .calculator form input{
+            border: 0;
+            outline: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
+            background: transparent;
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+        } 
+        form .display{
+            display: flex;
+            justify-content: flex-end;
+            margin: 20px 0;
+        }
+        form .display input{
+            text-align: right;
+            flex: 1;
+            font-size: 45px;
+            box-shadow: none;
+        }
+        form input.equal{
+            width: 145px;
+        }
+        form input.operator{
+            color: #33ffd8;
+        }
+    </style>
 </head>
 <body>
-    <div class="contain">
-        <div class="first-container">
-            <h1 class="first">We</h1>
-            <h1 class="second">Calculate</h1>
-        </div>
-        <div class="second-container">
-            <div class="box-around">
-                <input id="first-input" type="text">
-                <input id="second-input" type="text">
-            </div>
-            <div class="calculator">
-                <div class="signs">
-                    <button onclick="add()">+</button>
-                    <button onclick="subtract()">-</button>
-                    <button onclick="multiplication()">*</button>
-                    <button onclick="division()">/</button>
+    <div class="container">
+        <div class="calculator">
+            <form>
+                <div class="display">
+                    <input type="text" name="display">
                 </div>
-                <div class="output-box">
-                    <p class="answer"></p>
+                <div>
+                    <input type="button" value="AC"  onclick="display.value = '' " class="operator">
+                    <input type="button" value="DE"  onclick="display.value = display.value.toString().slice(0,-1)" class="operator">
+                    <input type="button" value="." onclick="display.value += '.' " class="operator">
+                    <input type="button" value="/"  onclick="display.value += '/' " class="operator">
                 </div>
-            </div>
+                <div>
+                    <input type="button" value="7" onclick="display.value += '7' ">
+                    <input type="button" value="8" onclick="display.value += '8' ">
+                    <input type="button" value="9" onclick="display.value += '9' ">
+                    <input type="button" value="*" onclick="display.value += '*' " class="operator">
+                </div>
+                <div>
+                    <input type="button" value="4" onclick="display.value += '4' ">
+                    <input type="button" value="5" onclick="display.value += '5' ">
+                    <input type="button" value="6" onclick="display.value += '6' ">
+                    <input type="button" value="-" onclick="display.value += '-' " class="operator">
+                </div>
+                <div>
+                    <input type="button" value="1" onclick="display.value += '1' ">
+                    <input type="button" value="2" onclick="display.value += '2' ">
+                    <input type="button" value="3" onclick="display.value += '3' ">
+                    <input type="button" value="+" onclick="display.value += '+' " class="operator">
+                </div>
+                <div>
+                    <input type="button" value="00" onclick="display.value += '00' ">
+                    <input type="button" value="0" onclick="display.value += '0' ">
+                    <input type="button" value="=" onclick="display.value = eval(display.value)" class="equal operator">
+                </div>
+            </form>
         </div>
     </div>
 </body>
 </html>
-
-<script>
-    let myHtmlBody = document.body
-
-    let input1 = document.getElementById('first-input')
-    let input2 = document.getElementById('second-input')
-    let myDiv = document.querySelector('.output-box')
-    function add() {
-        let myAns = Number(input1.value) + Number(input2.value)
-        myDiv.innerHTML = myAns
-        input1.value = ''
-        input2.value = ''
-    }
-    function subtract() {
-        let myAns = Number(input1.value) - Number(input2.value)
-        myDiv.innerHTML = myAns
-        input1.value = ''
-        input2.value = ''
-    }
-    function multiplication() {
-        let myAns = Number(input1.value) * Number(input2.value)
-        myDiv.innerHTML = myAns
-        input1.value = ''
-        input2.value = ''
-    }
-    function division() {
-        let myAns = Number(input1.value) / Number(input2.value)
-        myDiv.innerHTML = myAns
-        input1.value = ''
-        input2.value = ''
-    }
-    
-</script>
-
-<!-- dollar and curly bracket to be able to add value in the div -->
